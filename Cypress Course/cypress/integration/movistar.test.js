@@ -15,14 +15,9 @@ describe('movistar', ()=>{
         cy.get('.details > ul > :nth-child(1)').contains('cuotas').invoke('text').should((text1)=>{
             var res = text1.split(" ");
             var cuotas = parseInt(res[1])
-            if(cuotas > 12){
-                cantCuotas = cuotas
-            }
-
-            if(text1 != `Hasta ${cantCuotas} cuotas sin interés con tarjetas seleccionadas`){
+            if(cuotas < 12){
                 throw new Error('El producto no soporta un minimo de 12 cuotas sin interes');
             }
-
         }) 
         
     })
