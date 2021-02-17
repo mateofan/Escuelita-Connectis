@@ -6,19 +6,14 @@ describe('movistar', ()=>{
         cy.visit('https://tienda.movistar.com.ar');
     })
 
-    it('A10s con cuotas', ()=>{
-        var cantCuotas = 12;
+    it('A31 con cuotas', ()=>{
+
         cy.get('.icon-search.pnt-js-boton-buscador').type(' ');
-        cy.get('#myInput').type('A10s{enter}');
-        cy.get('.product-name > a').contains('Galaxy A10');
+        cy.get('#myInput').type('A31{enter}');
+        cy.get('.product-name > a').contains('Galaxy A31');
         cy.get('.button').click()
-        cy.get('.details > ul > :nth-child(1)').contains('cuotas').invoke('text').should((text1)=>{
-            var res = text1.split(" ");
-            var cuotas = parseInt(res[1])
-            if(cuotas < 12){
-                throw new Error('El producto no soporta un minimo de 12 cuotas sin interes');
-            }
-        }) 
+        cy.get('.details > ul > :nth-child(1)').contains('cuotas').should('have.text', 'Hasta 18 cuotas sin interés con tarjetas seleccionadas')
+        
         
     })
     it('Alta Gama', ()=>{
