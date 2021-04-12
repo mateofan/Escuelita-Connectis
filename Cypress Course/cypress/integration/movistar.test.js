@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const MovistarPage = require("../pageObjects/movistarPage");
+const productsToCheck = require("../fixtures/enviroment.json").products;
 
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
@@ -51,10 +52,19 @@ describe('movistar', ()=>{
 
     })
 
-    /*it('Negocios', ()=>{
+    it('Negocios', ()=>{
 
-        cy.get('.navigation-secondary__item').eq(1).click()
-    })*/
+        movistarPage.getNegocios().eq(1).click();
+        movistarPage.checkNegocios();
+        movistarPage.getSolapas().should('contain', "Tienda").and('contain', "Productos y Servicios").and("contain", "Ayuda").and("contain", "Beneficios");
+        movistarPage.getProductosYServicios().trigger("mouseover");
+        movistarPage.getServicio().then(($el)=>{
+            
+            for (let i = 0; i < productsToCheck.length; i++){
+                expect($el).to.not.contain(productsToCheck[i])
+            }
+        })
+    })
     
 
 })

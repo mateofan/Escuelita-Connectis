@@ -4,9 +4,11 @@ export default class movistarPage {
     productosYServicios='div.dnavigation__link > :nth-child(1)';
     servicio='.dnavigation__link';
     urlTelevision= 'television/planes';
-    negocios='.navigation-secondary__user-type';
+    negocios='.navigation-secondary__item';
     precioDescontado='.price.text42';
-    precioFinal='.mes.text18.fontGris'
+    precioFinal='.mes.text18.fontGris';
+    urlNegocios='negocios';
+    solapas=".dnavigation__item";
 
     //metodos
 
@@ -20,6 +22,9 @@ export default class movistarPage {
     checkTelevision(){
         return cy.url().should('include', this.urlTelevision);
     }
+    checkNegocios(){
+        return cy.url().should('include', this.urlNegocios);
+    }
     getNegocios(){
         return cy.get(this.negocios);
     }
@@ -28,6 +33,9 @@ export default class movistarPage {
     }
     getPrecioFinal(){
         return cy.get(this.precioFinal);
+    }
+    getSolapas(){
+        return cy.get(this.solapas);
     }
     
 
